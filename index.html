@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>三石的个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0070F3',
+                        secondary: '#7C3AED'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .transition-all {
+                transition-property: all;
+                transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+                transition-duration: 150ms;
+            }
+            .animate-fade-in {
+                animation: fadeIn 0.5s ease-in;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        }
+    </style>
+    <script>
+        // 主题切换功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggleBtn = document.getElementById('themeToggle');
+            const html = document.documentElement;
+
+            // 从本地存储中获取主题设置
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) {
+                html.classList.toggle('dark', savedTheme === 'dark');
+            } else {
+                // 如果没有保存的主题设置，则使用系统主题
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                html.classList.toggle('dark', prefersDark);
+                localStorage.setItem('theme', prefersDark ? 'dark' : 'light');
+            }
+
+            // 监听主题切换按钮点击事件
+            themeToggleBtn.addEventListener('click', function() {
+                html.classList.toggle('dark');
+                const isDark = html.classList.contains('dark');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            });
+
+            // 监听系统主题变化
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+                if (!localStorage.getItem('theme')) {
+                    html.classList.toggle('dark', e.matches);
+                    localStorage.setItem('theme', e.matches ? 'dark' : 'light');
+                }
+            });
+        });
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900 transition-all">
+    <!-- 主题切换按钮 -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all">
+            <i class="fas fa-sun text-yellow-500 dark:hidden"></i>
+            <i class="fas fa-moon text-blue-300 hidden dark:block"></i>
+        </button>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <main class="min-h-screen container mx-auto px-4 py-16 max-w-4xl">
+        <!-- 个人信息区域 -->
+        <section class="text-center mb-16 animate-fade-in">
+            <div class="mb-8">
+                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=guicang" alt="头像" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-primary">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-2">三石 / San Shi</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-4">产品经理 / 设计师 / AI爱好者</p>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">一个喜欢折腾的产品经理，会一点编程，会一点设计，会一点AI，喜欢探索新事物，喜欢分享知识，喜欢发掘新产品，未来已来，AI的世界无限可能！</p>
+                <p class="text-lg text-gray-600 dark:text-gray-400 mt-2"><i class="fas fa-map-marker-alt mr-2"></i>上海</p>
+            </div>
+            <div class="flex justify-center space-x-4 flex-wrap gap-y-2">
+                <a href="mailto:contact@aibetas.com.cn" class="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-white hover:bg-blue-600 transition-all">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Mail
+                </a>
+                <a href="#" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-400 text-white hover:bg-blue-500 transition-all">
+                    <i class="fab fa-twitter mr-2"></i>
+                    Twitter
+                </a>
+                <a href="https://github.com/AIBetas-ai" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg bg-gray-800 text-white hover:bg-gray-700 transition-all">
+                    <i class="fab fa-github mr-2"></i>
+                    GitHub
+                </a>
+                <a href="https://aibetas.com.cn/" target="_blank" class="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-all">
+                    <i class="fab fa-web mr-2"></i>
+                    官网
+                </a>
+            </div>
+        </section>
+
+        <!-- 教育背景与经历 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">教育背景与经历</h2>
+            <div class="space-y-6">
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">某某大学</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">计算机科学与技术 | 学士学位 | 2018-2022</p>
+                    <p class="text-gray-600 dark:text-gray-400">主修人工智能和Web开发，参与多个创新项目，获得优秀毕业生称号。</p>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">某某科技公司</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">全栈开发工程师 | 2022-至今</p>
+                    <p class="text-gray-600 dark:text-gray-400">负责公司核心产品的开发和维护，推动产品性能优化，提升用户体验。</p>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">开源社区贡献</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-2">开源项目维护者 | 2021-至今</p>
+                    <p class="text-gray-600 dark:text-gray-400">积极参与开源社区建设，为多个流行框架贡献代码，分享技术经验。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 技能展示 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">技能专长</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">前端开发</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">React</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-primary w-[90%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">Vue.js</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-primary w-[85%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">TypeScript</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-primary w-[80%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">后端开发</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">Node.js</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[85%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">Python</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[80%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">数据库</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[75%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">设计技能</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">Figma</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[90%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">UI/UX</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[85%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-4">其他技能</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">DevOps</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[75%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-gray-600 dark:text-gray-400 w-24">AI/ML</span>
+                            <div class="flex-1 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                                <div class="bg-secondary w-[70%] h-2 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 作品集展示 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">作品集</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <img src="https://raw.githubusercontent.com/AIBetas-ai/sanshi/main/astronaut-8785566_1280.png" alt="项目预览" class="w-full rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">智能助手平台</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">基于AI技术的智能助手平台，提供自然语言处理和智能对话功能。</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">AI</span>
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Python</span>
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">React</span>
+                    </div>
+                    <a href="#" class="text-primary hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium">查看详情 →</a>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <img src="https://raw.githubusercontent.com/AIBetas-ai/sanshi/main/construction-8574908_1280.png" alt="项目预览" class="w-full rounded-lg mb-4">
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">设计系统框架</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">企业级设计系统框架，包含组件库和设计规范。</p>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">UI设计</span>
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">Vue.js</span>
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full text-sm">TypeScript</span>
+                    </div>
+                    <a href="#" class="text-primary hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium">查看详情 →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 简历下载 -->
+        <section class="mb-16 text-center">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">简历下载</h2>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white hover:bg-blue-600 transition-all">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    中文简历
+                </a>
+                <a href="#" class="inline-flex items-center px-6 py-3 rounded-lg bg-primary text-white hover:bg-blue-600 transition-all">
+                    <i class="fas fa-file-pdf mr-2"></i>
+                    English CV
+                </a>
+            </div>
+        </section>
+
+        <!-- 博客文章 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">最新文章</h2>
+            <div class="space-y-6">
+                <article class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500 dark:text-gray-400"><i class="far fa-calendar mr-2"></i>2024-01-15</span>
+                        <span class="mx-2 text-gray-300 dark:text-gray-600">|</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">技术分享</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">深入理解现代前端框架</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">探讨现代前端框架的发展趋势和最佳实践...</p>
+                    <a href="#" class="text-primary hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium">阅读全文 →</a>
+                </article>
+                <article class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500 dark:text-gray-400"><i class="far fa-calendar mr-2"></i>2024-01-10</span>
+                        <span class="mx-2 text-gray-300 dark:text-gray-600">|</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">设计思考</span>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-900 dark:text-white mb-2">设计系统的构建之路</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">分享如何从零开始构建一个企业级设计系统...</p>
+                    <a href="#" class="text-primary hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 font-medium">阅读全文 →</a>
+                </article>
+            </div>
+        </section>
+
+        <!-- 动态更新 -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">最新动态</h2>
+            <div class="space-y-6">
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500 dark:text-gray-400"><i class="far fa-calendar mr-2"></i>2024-01-20</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">参与开源项目里程碑</h3>
+                    <p class="text-gray-600 dark:text-gray-400">成功为React生态贡献重要功能，获得社区认可。</p>
+                </div>
+                <div class="p-6 bg-gray-50 dark:bg-gray-800 rounded-xl hover:shadow-lg transition-all">
+                    <div class="flex items-center mb-4">
+                        <span class="text-sm text-gray-500 dark:text-gray-400"><i class="far fa-calendar mr-2"></i>2024-01-05</span>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">技术分享会</h3>
+                    <p class="text-gray-600 dark:text-gray-400">在某某技术大会上分享《现代前端工程化实践》主题演讲。</p>
+                </div>
+            </div>
+        </section>
